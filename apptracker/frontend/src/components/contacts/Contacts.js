@@ -5,7 +5,9 @@ import { getContacts, deleteContact } from "../../actions/contacts";
 
 export class Contacts extends Component {
   static propTypes = {
-    contacts: PropTypes.array.isRequired
+    contacts: PropTypes.array.isRequired,
+    getContacts: PropTypes.func.isRequired,
+    deleteContact: PropTypes.func.isRequired
   };
 
   componentDidMount() {
