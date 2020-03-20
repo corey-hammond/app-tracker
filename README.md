@@ -38,5 +38,26 @@ Add scripts to compile React app to package.json:
 "dev": "webpack --mode development ./apptracker/frontend/src/index.js --output ./apptracker/frontend/static/frontend/main.js",
 "build": "webpack --mode production ./apptracker/frontend/src/index.js --output ./apptracker/frontend/static/frontend/main.js"
 
-Create Index.js and App.js
+Create index.js, App.js, index.html; in index.html add our root id of 'app', any Django static files, and the compiled main.js in script tags:
+```
+<div id="app"></div>
+{% load static %}
+<script src="{% static "frontend/main.js" %}"></script>
+```
 
+To load index.html, point to template in frontend/views.py:
+```
+def index(request):
+  return render(request, 'frontend/index.html')
+```
+
+And then create a url in frontend/urls.py:
+```
+urlpatterns = [
+    path('', views.index),
+]
+```
+
+Add new urls to main urls file in root project; run npm run dev to compile to main.js, which gets loaded into index.html as a Django template
+
+Run python server and applicion now running on port 8000
