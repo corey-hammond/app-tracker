@@ -69,4 +69,14 @@ urlpatterns = [
 
 Add new urls to main urls file in root project; run npm run dev to compile to main.js, which gets loaded into index.html as a Django template
 
-Run python server and applicion now running on port 8000
+Run python server and application now running on port 8000
+
+### Set up Redux
+
+Install dependencies:
+
+```
+npm install redux react-redux redux-thunk redux-devtools-extensions
+```
+
+Create "store" in src/store.js
