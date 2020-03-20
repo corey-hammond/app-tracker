@@ -69,7 +69,7 @@ urlpatterns = [
 
 Add new urls to main urls file in root project; run npm run dev to compile to main.js, which gets loaded into index.html as a Django template
 
-Run python server and application now running on port 8000
+Run python server and npm run dev, application now running on port 8000
 
 ### Set up Redux
 
@@ -79,7 +79,7 @@ Install dependencies:
 npm install redux react-redux redux-thunk redux-devtools-extensions
 ```
 
-Create "store" in src/store.js
+Create "store" in src/store.js; Store uses createStore which takes in a rootReducer, initialState object, and any middleware
 
 Create rootReducer in reducers/index.js
 
@@ -124,6 +124,18 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { getContacts })(Contacts)
 ```
 
-Component fires off getContacts from the contacts action thanks to connect from react-redux, getContacts makes the http request and sends the date to the contacts reducer via action.payload, and the contacts reducer determines what happens and makes a copy of the current state, then updates it with the retrieved data, and then sends back to the component as props via mapStateToProps.
+Contacts component fires off getContacts from the contacts action thanks to connect from react-redux, getContacts makes the http request and sends the data to the contacts reducer using dispatch via action.payload, and the contacts reducer determines what happens and makes a copy of the current state, then updates it with the retrieved data, and then sends back to the component as props via mapStateToProps.
 
 Add any additional actions to contacts actions: delete, post, etc
+
+### React Alerts
+
+```
+npm install react-alert react-alert-template-basic react-transition-group
+```
+
+Bring in AlertProvider in to App.js, setup Alert options, and wrap components in AlertProvider (under redux Provider)
+
+Create an Alerts component to display the alert, that uses withAlert
+
+Allow Redux to manage our errors: create an errors reducer and type, dispatch the type and action in catch blocks

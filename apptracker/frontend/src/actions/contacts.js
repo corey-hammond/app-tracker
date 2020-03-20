@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_CONTACTS, DELETE_CONTACT, ADD_CONTACT } from "./types";
+import { GET_CONTACTS, DELETE_CONTACT, ADD_CONTACT, GET_ERRORS } from "./types";
 
 // GET CONTACTS
 export const getContacts = () => dispatch => {
@@ -13,7 +13,7 @@ export const getContacts = () => dispatch => {
         payload: res.data // returning data from the server
       });
     })
-    .catch(error => console.log(error));
+    .catch(err => console.log(err));
 };
 
 // DELETE CONTACT
@@ -26,7 +26,7 @@ export const deleteContact = id => dispatch => {
         payload: id
       });
     })
-    .catch(error => console.log(error));
+    .catch(err => console.log(err));
 };
 
 // ADD CONTACT
@@ -39,5 +39,15 @@ export const addContact = contact => dispatch => {
         payload: res.data
       });
     })
-    .catch(error => console.log(error));
+    .catch(err => {
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status
+      };
+      console.log(errors);
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors
+      });
+    });
 };
