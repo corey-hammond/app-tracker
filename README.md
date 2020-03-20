@@ -80,3 +80,44 @@ npm install redux react-redux redux-thunk redux-devtools-extensions
 ```
 
 Create "store" in src/store.js
+
+Create rootReducer in reducers/index.js
+
+In App.js bring in "store" and "provider" from react-redux to connect react and redux; Provider takes in "store" as a prop and you wrap Provider around everything in App.js:
+
+```
+<Provider store={store}>
+// Other components here
+</Provider>
+```
+
+Create a types.js in src/actions to hold our action types
+
+Create a contactsReducer for Contacts state management and add to rootReducer; add an initialState, export default function to evaluate the action types being sent
+Remember to make copies of state when returning new data:
+
+```
+switch(action.type) {
+    case GET_CONTACTS:
+      return {
+        ...state, // Spread operator to copy state and then update contacts
+        contacts: action.payload
+      }
+    default:
+      return state;
+  }
+```
+
+Now create a contacts actions file, src/actions/contacts.js; action methods go here along with http requests, using the dispatch callback
+
+Call the action method from the appropriate component, in this case the contacts list component. Must use {connect} from the react-redux package, and map redux state to the component's props, then call the method from props when component mounts:
+
+```
+
+
+const mapStateToProps = state => ({
+  contacts: state.contactsReducer.contacts
+})
+
+export default connect(mapStateToProps, { getContacts })(Contacts)
+```
