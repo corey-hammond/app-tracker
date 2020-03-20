@@ -113,7 +113,9 @@ Now create a contacts actions file, src/actions/contacts.js; action methods go h
 Call the action method from the appropriate component, in this case the contacts list component. Must use {connect} from the react-redux package, and map redux state to the component's props, then call the method from props when component mounts:
 
 ```
-
+componentDidMount() {
+  this.props.getContacts();
+}
 
 const mapStateToProps = state => ({
   contacts: state.contactsReducer.contacts
@@ -121,3 +123,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, { getContacts })(Contacts)
 ```
+
+Component fires off getContacts from the contacts action thanks to connect from react-redux, getContacts makes the http request and sends the date to the contacts reducer via action.payload, and the contacts reducer determines what happens and makes a copy of the current state, then updates it with the retrieved data, and then sends back to the component as props via mapStateToProps.
+
+Add any additional actions to contacts actions: delete, post, etc

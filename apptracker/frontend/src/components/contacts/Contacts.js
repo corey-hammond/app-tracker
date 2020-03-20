@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getContacts } from "../../actions/contacts";
+import { getContacts, deleteContact } from "../../actions/contacts";
 
 export class Contacts extends Component {
   static propTypes = {
@@ -34,7 +34,12 @@ export class Contacts extends Component {
                 <td>{contact.email}</td>
                 <td>{contact.comments}</td>
                 <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button
+                    onClick={this.props.deleteContact.bind(this, contact.id)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -50,4 +55,6 @@ const mapStateToProps = state => ({
   contacts: state.contactsReducer.contacts
 });
 
-export default connect(mapStateToProps, { getContacts })(Contacts);
+export default connect(mapStateToProps, { getContacts, deleteContact })(
+  Contacts
+);
