@@ -4,7 +4,8 @@
   "description": "An application to track job applications, networking events, and contacts.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development ./apptracker/frontend/src/index.js --output ./apptracker/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./apptracker/frontend/src/index.js --output ./apptracker/frontend/static/frontend/main.js"
   },
   "repository": {
     "type": "git",

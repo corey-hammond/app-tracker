@@ -28,3 +28,15 @@ Install React
 npm install react react-dom prop-types
 ```
 
+To use Babel presets and plugins: 
+Create .babelrc in root and configure json file
+
+Create Webpack config file:
+Create webpack.config.js in root and load the babel loader
+
+Add scripts to compile React app to package.json:
+"dev": "webpack --mode development ./apptracker/frontend/src/index.js --output ./apptracker/frontend/static/frontend/main.js",
+"build": "webpack --mode production ./apptracker/frontend/src/index.js --output ./apptracker/frontend/static/frontend/main.js"
+
+Create Index.js and App.js
+
