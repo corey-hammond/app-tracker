@@ -11,6 +11,7 @@ export class Contacts extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     this.props.getContacts();
   }
 

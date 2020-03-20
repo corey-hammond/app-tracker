@@ -138,4 +138,7 @@ Bring in AlertProvider in to App.js, setup Alert options, and wrap components in
 
 Create an Alerts component to display the alert, that uses withAlert
 
-Allow Redux to manage our errors: create an errors reducer and type, dispatch the type and action in catch blocks
+Allow Redux to manage our errors in state: create an errors reducer and type, dispatch the type/action in catch blocks
+
+Get the errors state in the Alert component: mapStateToProps and connect
+

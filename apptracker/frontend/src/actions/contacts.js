@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createMessage } from "./messages";
 
 import { GET_CONTACTS, DELETE_CONTACT, ADD_CONTACT, GET_ERRORS } from "./types";
 
@@ -21,6 +22,7 @@ export const deleteContact = id => dispatch => {
   axios
     .delete(`/api/contacts/${id}/`)
     .then(res => {
+      dispatch(createMessage({ deleteLead: "Contact Deleted" }));
       dispatch({
         type: DELETE_CONTACT,
         payload: id
@@ -34,6 +36,7 @@ export const addContact = contact => dispatch => {
   axios
     .post("/api/contacts/", contact)
     .then(res => {
+      dispatch(createMessage({ addLead: "Contact Added" }));
       dispatch({
         type: ADD_CONTACT,
         payload: res.data
@@ -44,7 +47,6 @@ export const addContact = contact => dispatch => {
         msg: err.response.data,
         status: err.response.status
       };
-      console.log(errors);
       dispatch({
         type: GET_ERRORS,
         payload: errors
