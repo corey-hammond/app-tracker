@@ -12,7 +12,7 @@ export class Form extends Component {
 
   static propTypes = {
     addContact: PropTypes.func.isRequired
-  }
+  };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
@@ -20,8 +20,13 @@ export class Form extends Component {
     e.preventDefault();
     // construct the new contact
     const { name, email, comments } = this.state;
-    const contact = { name, email, comments }
+    const contact = { name, email, comments };
     this.props.addContact(contact);
+    this.setState({
+      name: "",
+      email: "",
+      comments: ""
+    });
   };
 
   render() {
@@ -70,7 +75,5 @@ export class Form extends Component {
     );
   }
 }
-
-
 
 export default connect(null, { addContact })(Form);

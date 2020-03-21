@@ -142,3 +142,53 @@ Allow Redux to manage our errors in state: create an errors reducer and type, di
 
 Get the errors state in the Alert component: mapStateToProps and connect
 
+## Backend Authentication
+
+### Django's User Model
+
+Import Django's User model into your models.py:
+
+```
+from django.contrib.auth.models import User
+```
+
+Add an owner field to your model and then migrate:
+
+```
+owner = models.ForeignKey(
+  User, related_name="contacts", on_delete=models.CASCADE, null=True)
+```
+
+Update your viewset in api.py to permissions IsAuthenticated and define new queryset:
+
+```
+class ContactViewSet(viewsets.ModelViewSet):
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = ContactSerializer
+
+    def get_queryset(self):
+        return self.request.user.contacts.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+```
+
+### Django Knox Authentication
+
+Update project settings.py by adding 'knox' to the installed apps, and add:
+
+```
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication')
+}
+```
+
+...then migrate
+
+Create serializers for auth in new app 'accounts'
+Create API for register, login, and user routes
+Create urls for 'accounts'
