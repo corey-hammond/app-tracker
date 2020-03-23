@@ -207,7 +207,7 @@ Now we need to bring in the back-end authentication data (token, user, etc.) to 
 npm install react-router-dom
 ```
 
-We will use the HashRouter, wrap App.js components in <Router>, under all Providers 
+We will use the HashRouter, wrap App.js components in <Router>, under all Providers
 
 Build a Login and Register component
 
@@ -216,4 +216,15 @@ Build an 'auth' reducer to bring auth data into state
 Create a PrivateRoute component that will check user authentication and then provide the appropriate route or redirect to login page. Bring in the authReducer as props. The function will take in auth state and return a <Route />. In the <Route />'s render function, check for auth status and return component if user authenticated or return a redirect to login page if not.
 
 In App.js, use PrivateRoute now instead of Route for any routes that you want to protect
+
+Create an auth action with a method for loading the user and checking local storage for a token
+
+In App.js, run the loadUser action in componentDidMount:
+
+```
+componentDidMount() {
+    store.dispatch(loadUser());
+  }
+```
+
 
