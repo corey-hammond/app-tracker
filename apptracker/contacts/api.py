@@ -3,6 +3,8 @@ from rest_framework import viewsets, permissions
 from .serializers import ContactSerializer
 
 # Contact Viewset
+
+
 class ContactViewSet(viewsets.ModelViewSet):
 
     permission_classes = [

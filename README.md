@@ -142,7 +142,7 @@ Allow Redux to manage our errors in state: create an errors reducer and type, di
 
 Get the errors state in the Alert component: mapStateToProps and connect
 
-## Backend Authentication
+## Backend Token Authentication
 
 ### Django's User Model
 
@@ -177,7 +177,7 @@ class ContactViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 ```
 
-### Django Knox Authentication
+### Django Knox Token Authentication
 
 Update project settings.py by adding 'knox' to the installed apps, and add:
 
@@ -190,5 +190,30 @@ REST_FRAMEWORK = {
 ...then migrate
 
 Create serializers for auth in new app 'accounts'
+
 Create API for register, login, and user routes
+
 Create urls for 'accounts'
+
+We now have the ability to acquire a token and provide routes and data based off the user's token
+
+## Frontend Authentication
+
+Now we need to bring in the back-end authentication data (token, user, etc.) to the front-end state
+
+### React Router / Private Routes for Authentication
+
+```
+npm install react-router-dom
+```
+
+We will use the HashRouter, wrap App.js components in <Router>, under all Providers 
+
+Build a Login and Register component
+
+Build an 'auth' reducer to bring auth data into state
+
+Create a PrivateRoute component that will check user authentication and then provide the appropriate route or redirect to login page. Bring in the authReducer as props. The function will take in auth state and return a <Route />. In the <Route />'s render function, check for auth status and return component if user authenticated or return a redirect to login page if not.
+
+In App.js, use PrivateRoute now instead of Route for any routes that you want to protect
+
