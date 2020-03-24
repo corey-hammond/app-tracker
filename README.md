@@ -229,4 +229,12 @@ componentDidMount() {
   }
 ```
 
-Create a Login User action to get token and set it in state; add state's 'isAuthenticated' and the login action to Login component via mapStateToProps
+Create a Login user action to get token and set it in state; add state's 'isAuthenticated' and the login action to Login component via mapStateToProps
+
+To conditionally render links based on authentication, bring in auth state to Header.js via connect and mapStateToProps
+
+Create a Logout user action and connect it to Header.js, as the Logout button's onClick
+
+```
+<button onClick={this.props.logout}>
+```
