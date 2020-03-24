@@ -217,7 +217,9 @@ Create a PrivateRoute component that will check user authentication and then pro
 
 In App.js, use PrivateRoute now instead of Route for any routes that you want to protect
 
-Create an auth action with a method for loading the user and checking local storage for a token
+### Authorization Actions (actions/auth.js)
+
+Create an auth.js in actions with a method for loading the user and checking local storage for a token
 
 In App.js, run the loadUser action in componentDidMount:
 
@@ -227,4 +229,4 @@ componentDidMount() {
   }
 ```
 
-
+Create a Login User action to get token and set it in state; add state's 'isAuthenticated' and the login action to Login component via mapStateToProps
