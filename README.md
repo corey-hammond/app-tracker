@@ -217,7 +217,7 @@ Create a PrivateRoute component that will check user authentication and then pro
 
 In App.js, use PrivateRoute now instead of Route for any routes that you want to protect
 
-### Authorization Actions (actions/auth.js)
+### Authorization Actions for Login/Logout (actions/auth.js)
 
 Create an auth.js in actions with a method for loading the user and checking local storage for a token
 
@@ -238,3 +238,7 @@ Create a Logout user action and connect it to Header.js, as the Logout button's 
 ```
 <button onClick={this.props.logout}>
 ```
+
+### Auth Actions for Registering
+
+Create a Register action method and add register types to auth reducer; bring in to Register component.

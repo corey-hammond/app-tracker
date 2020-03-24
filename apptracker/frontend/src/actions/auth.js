@@ -6,10 +6,12 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL
 } from "./types";
 
-// CHECK TOKEN & LOAD USER
+// LOAD USER (Check for token)
 export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
@@ -30,9 +32,37 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+// REGISTER USER
+export const register = ({ username, email, password }) => dispatch => {
+  // Set Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // Request Body
+  const body = JSON.stringify({ username, email, password });
+
+  axios
+    .post("/api/auth/register", body, config)
+    .then(res => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: REGISTER_FAIL
+      });
+    });
+};
+
 // LOGIN USER (Request a token)
 export const login = (username, password) => dispatch => {
-  // Headers
+  // Set Headers
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -58,7 +88,7 @@ export const login = (username, password) => dispatch => {
     });
 };
 
-// LOGOUT USER
+// LOGOUT USER (Delete token)
 export const logout = () => (dispatch, getState) => {
   // Must pass in 'null' for the body
   axios
