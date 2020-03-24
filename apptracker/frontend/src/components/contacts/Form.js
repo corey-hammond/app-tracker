@@ -57,13 +57,13 @@ export class Form extends Component {
           </div>
           <div className="form-group">
             <label>Comments</label>
-            <input
+            <textarea
               type="text"
               name="comments"
               onChange={this.onChange}
               value={comments}
               className="form-control"
-            />
+            ></textarea>
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-primary">

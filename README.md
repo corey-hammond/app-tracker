@@ -242,3 +242,4 @@ Create a Logout user action and connect it to Header.js, as the Logout button's 
 ### Auth Actions for Registering
 
 Create a Register action method and add register types to auth reducer; bring in to Register component.
+
